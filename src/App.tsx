@@ -1,26 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
+import './index.css';
+import { Store } from './Store'
+//import { IAction, IEpisode, IEpisodeProps } from './interfaces'
+import { Link } from '@reach/router';
+//import BtnToggleText from './BtnToggleText'
 
-function App() {
+
+
+export default function App(props: any): JSX.Element {
+  const { state } = React.useContext(Store)
+
+  console.log('state is', state);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <>
+      <header>
+        <div>
+          <h1>Rick and Morty!</h1>
+          <p>Pick your favourite episode</p>
+        </div>
+        <div>
+          <Link to='/'>Home</Link>
+          <Link to='/faves'>Favourites length is {state.favourites.length}</Link>
+        </div>
       </header>
-    </div>
-  );
+      <main>
+        {props.children}
+      </main>
+    </>
+  )
 }
 
-export default App;
+
